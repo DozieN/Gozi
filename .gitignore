@@ -30,6 +30,9 @@ _ReSharper*/
 *.csproj.user
 *.resharper.user
 *.resharper
+*.Debug.config
+*.Staging.config
+*.Release.config
 *.suo
 *.cache
 *~
@@ -37,7 +40,7 @@ _ReSharper*/
 _sgbak
 *.xap
 [Cc]lient[Bb]in*/
-Logs*/
-Cache*/
-Floorplans*/
-Resources/files*/
+[Ll]ogs*/
+[Cc]ache*/
+[Ff]loorplans*/
+[Rr]esources/files*/
