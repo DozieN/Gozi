@@ -1,0 +1,47 @@
+Install
+=======
+
+1.Download or build from source androidziphelper module.
+2.Place org.gozi.androidziphelper-android-x.y.z file to /Library/Application Support/Titanium and unzip it.
+
+How to use
+==========
+
+1.Register androidziphelper module with your application by editing `tiapp.xml` and adding your module.
+
+<modules>
+	<module version="x.y.z">zipfile</module>
+</modules>
+
+2. Call extract(path_to_zip_file, dir_to_extract)
+
+Example
+=======
+
+	//app.js: download zip from DropBox to Documents folder and extact file to Documents folder
+
+	var window = Ti.UI.createWindow({
+		backgroundColor:'white'
+	});
+	var label = Ti.UI.createLabel();
+	window.add(label);
+
+	//tab group open event
+	window.addEventListener('open', function(e)
+	{
+		// TODO: write your module tests here
+		var androidziphelper = require('org.gozi.androidziphelper');
+		Ti.API.info("module is => " + androidziphelper);
+
+		var xhr = Titanium.Network.createHTTPClient();
+		xhr.onload = function()
+		{
+			var f = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, 'test.zip');
+			f.write(this.responseData);
+			Ti.API.log('INFO', Ti.Filesystem.applicationDataDirectory);
+			androidziphelper.extract(Ti.Filesystem.applicationDataDirectory + '/test.zip', Ti.Filesystem.applicationDataDirectory);
+		};
+		xhr.open('GET', 'http://dl.dropbox.com/u/1400234/test.zip');
+		xhr.send();
+	});
+	window.open();
